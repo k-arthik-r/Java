@@ -1,0 +1,45 @@
+// Leaky Bucket
+
+import java.util.Scanner;
+public class Leaky
+{
+    public static int bucketSize = 1000;
+    public static int outputRate = 100;
+
+    public static void sendPacket(int packetSize)
+    {
+        if(packetSize > bucketSize)
+        {
+            System.out.println("Bucket Overflow!");
+        }
+        else
+        {
+            while (packetSize > outputRate) {
+                System.out.println(outputRate + " bytes of packets is sent");
+                packetSize = packetSize - outputRate;
+            }
+            System.out.println(packetSize + " bytes of packet is sent");
+        }
+    }
+
+    public static void main(String args[])
+    {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter the number of packets:");
+        int numPackets = scanner.nextInt();
+
+        if(numPackets > 0)
+        {
+            for(int i=1; i<=numPackets; i++)
+            {
+                System.out.println("Enter the packet"+i+" size");
+                int packetSize = scanner.nextInt();
+                sendPacket(packetSize);
+            }
+        }
+        else
+        {
+            System.out.println("No packets to send");
+        }
+    }
+}
